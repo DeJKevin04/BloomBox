@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout Receipt</title>
+<style>
+  body { font-family: Arial, sans-serif; }
+  .receipt-container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; }
+  .receipt-header { text-align: center; }
+  .receipt-body { margin-top: 20px; }
+  .item { display: flex; justify-content: space-between; margin-bottom: 10px; }
+  .total { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<div class="receipt-container">
+  <div class="receipt-header">
+    <h2>Checkout Receipt</h2>
+  </div>
+  <div class="receipt-body">
+    <!-- Items will be added here dynamically -->
+  </div>
+  <div class="total">
+    Total: $<span id="totalPrice">0.00</span>
+  </div>
+</div>
+
+<script>
+// Example cart items
+const cartItems = [
+  { name: 'Cactus Seeds', price: 20.00, quantity: 2 },
+  { name: 'Bonsai Tree', price: 35.00, quantity: 1 },
+  // Add more items as needed
+];
+
+function updateReceipt() {
+  const receiptBody = document.querySelector('.receipt-body');
+  const totalPriceSpan = document.getElementById('totalPrice');
+  let total = 0;
+
+  // Clear the receipt body
+  receiptBody.innerHTML = '';
+
+  // Add each cart item to the receipt
+  cartItems.forEach(item => {
+    const itemElement = document.createElement('div');
+    itemElement.classList.add('item');
+    itemElement.innerHTML = `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`;
+    receiptBody.appendChild(itemElement);
+    total += item.price * item.quantity;
+  });
+
+  // Update the total price
+  totalPriceSpan.textContent = total.toFixed(2);
+}
+
+// Call the function to update the receipt on page load
+updateReceipt();
+</script>
+
+</body>
+</html>
