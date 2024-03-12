@@ -67,7 +67,7 @@ These barcodes are 12-digit numbers generated randomly and can be used for your 
       <input type="number" value="1" min="1" class="item-quantity" data-price="15.00" oninput="updatePrice(this)" placeholder="1">
     </div>
     <!-- Updated button with copy functionality -->
-    <button onclick="copyToClipboard()">Copy Price</button>
+    <button onclick="addToCart('item3')">Add to Cart</button>
   </div>
 </div>
 
@@ -188,22 +188,6 @@ document.querySelectorAll('.item-quantity').forEach(input => {
   });
 });
 
-
-function copyToClipboard() {
-  // Get the price element
-  var priceText = document.querySelector('.item-price').textContent;
-
-  // Use the Clipboard API to copy the text
-  navigator.clipboard.writeText(priceText)
-    .then(() => {
-      // Success message
-      alert('Price copied to clipboard: $' + priceText);
-    })
-    .catch(err => {
-      // Error handling
-      console.error('Failed to copy text: ', err);
-    });
-}
 </script>
   
 
