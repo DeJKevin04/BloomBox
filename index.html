@@ -72,7 +72,7 @@ These barcodes are 12-digit numbers generated randomly and can be used for your 
 </div>
 
 <div class="card">
-  <img id="plant3" src="https://png.pngtree.com/png-vector/20240127/ourmid/pngtree-lucky-bamboo---gift-plant-png-image_11555807.png" alt="Item">
+  <img id="plant2" src="https://png.pngtree.com/png-vector/20240127/ourmid/pngtree-lucky-bamboo---gift-plant-png-image_11555807.png" alt="Item">
   <div class="container">
     <h4><b>Bamboo Seeds</b></h4>
     <div class="price-quantity">
@@ -80,7 +80,7 @@ These barcodes are 12-digit numbers generated randomly and can be used for your 
       <input type="number" value="1" min="1" class="item-quantity" data-price="25.00" oninput="updatePrice(this)" placeholder="1">
     </div>
     <!-- Updated button with copy functionality -->
-    <button onclick="addToCart('item4')">Add to Cart</button>
+    <button onclick="addToCart('item3')">Add to Cart</button>
   </div>
 </div>
 
@@ -94,16 +94,63 @@ These barcodes are 12-digit numbers generated randomly and can be used for your 
 
 
 <script>
-// JavaScript to handle the search submission
-document.getElementById('searchForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent the default form submission
-  var searchQuery = document.querySelector('[name="searchQuery"]').value;
-  // Implement your search logic here
-  console.log('Search for: ' + searchQuery);
-  // For example, you could redirect to a search results page like this:
-  // window.location.href = 'search-results-page.html?query=' + encodeURIComponent(searchQuery);
-});
+  // Function to filter cards based on search input
+  function filterCards() {
+    // Get the value of the search input
+    let searchInput = document.querySelector('.search-bar input').value.toLowerCase();
+    
+    // Get all the card elements
+    let cards = document.querySelectorAll('.card');
+    
+    // Loop through all cards
+    cards.forEach(function(card) {
+      // Get the title of the card
+      let title = card.querySelector('h4').textContent.toLowerCase();
+      
+      // If the title includes the search input, display the card, otherwise hide it
+      if (title.includes(searchInput)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
   
+  // Add event listener to the search button
+  document.querySelector('.search-bar button').addEventListener('click', filterCards);
+  
+  // Add event listener to the search input for 'Enter' key press
+  document.querySelector('.search-bar input').addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      filterCards();
+    }
+  });
+
+
+// Event listener for the search button click
+document.querySelector('.search-bar button[type="submit"]').addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent the default form submission
+  searchAndNavigate();
+});
+
+// Event listener for the search input 'Enter' key press
+document.querySelector('.search-bar input').addEventListener('keyup', function(event) {
+  if (event.key === 'Enter') {
+    searchAndNavigate();
+  }
+});
+
+// Add this JavaScript function to show all card items
+function showAllItems() {
+  // Select all the card elements
+  let cards = document.querySelectorAll('.card');
+  
+  // Loop through all cards and set their display to ''
+  cards.forEach(function(card) {
+    card.style.display = '';
+  });
+}
+
 // Add this JavaScript function to clear the search input when the delete button is clicked
 function clearSearchInput() {
   // Select the search input element
@@ -155,6 +202,27 @@ document.querySelectorAll('.item-quantity').forEach(input => {
     updatePrice(this);
   });
 });
+
+// Function to simulate an 'Enter' key press
+function simulateEnterKeyPress() {
+  // Create a new 'Enter' keypress event
+  var enterKeyPressEvent = new KeyboardEvent('keypress', { key: 'Enter', code: 'Enter', charCode: 13, keyCode: 13, which: 13 });
+
+  // Dispatch it on the search input field
+  document.querySelector('.search-bar input').dispatchEvent(enterKeyPressEvent);
+}
+
+// Add the event listener to your search icon
+document.querySelector('.search-bar .search-btn').addEventListener('click', simulateEnterKeyPress);
+
+// Your existing event listener for the 'Enter' key press
+document.querySelector('.search-bar input').addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    // Call your search function here
+    filterCards();
+  }
+});
+
 </script>
   
 
