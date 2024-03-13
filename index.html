@@ -202,7 +202,12 @@ document.querySelectorAll('.item-quantity').forEach(input => {
     updatePrice(this);
   });
 });
-
+// JavaScript to handle the search submission
+document.getElementById('searchForm').onsubmit = function() {
+  // Implement your search logic here
+  alert('Search for: ' + document.querySelector('[name="searchQuery"]').value);
+  return false; // Prevent page refresh
+};
 </script>
   
 
